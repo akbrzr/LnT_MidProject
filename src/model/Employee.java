@@ -5,108 +5,106 @@ import java.util.Random;
 import java.util.Set;
 
 public class Employee {
-    private String id;
-    private String name;
-    private String gender;
-    private String position;
-    private double salary;
-    private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private static final int NUM_DIGITS = 4;
-    private static final int NUM_LETTERS = 2;
-    private static final Set<String> usedIds = new HashSet<>();
+    private String idKaryawan;
+    private String nama;
+    private String jenisKelamin;
+    private String posisi;
+    private double gaji;
+    private static final String ABJAD = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final int digit = 4;
+    private static final int huruf = 2;
+    private static final Set<String> idTerpakai = new HashSet<>();
 
-    public Employee(String name, String gender, String position) {
+    public Employee(String nama, String jenisKelamin, String posisi) {
         super();
-        this.id = generateId();
-        this.name = name;
-        this.gender = gender;
-        this.position = position;
-        setSalaryBasedOnPosition(position);
+        this.idKaryawan = generateId();
+        this.nama = nama;
+        this.jenisKelamin = jenisKelamin;
+        this.posisi = posisi;
+        setGajiBerdasarkanPosisi(posisi);
     }
 
     private String generateId() {
-        String newId;
+        String idBaru;
         do {
-            newId = generateRandomId();
-        } while (usedIds.contains(newId));
+            idBaru = generateRandomId();
+        } while (idTerpakai.contains(idBaru));
 
-        usedIds.add(newId);
-        return newId;
+        idTerpakai.add(idBaru);
+        return idBaru;
     }
 
     private String generateRandomId() {
-        StringBuilder idBuilder = new StringBuilder();
+        StringBuilder pembangunId = new StringBuilder();
 
-        // Generate two random letters
-        for (int i = 0; i < NUM_LETTERS; i++) {
-            char randomLetter = ALPHABET.charAt(new Random().nextInt(ALPHABET.length()));
-            idBuilder.append(randomLetter);
+        for (int i = 0; i < huruf; i++) {
+            char hurufAcak = ABJAD.charAt(new Random().nextInt(ABJAD.length()));
+            pembangunId.append(hurufAcak);
         }
 
-        // Generate four random digits
-        for (int i = 0; i < NUM_DIGITS; i++) {
-            int randomNumber = new Random().nextInt(10);
-            idBuilder.append(randomNumber);
+        for (int i = 0; i < digit; i++) {
+            int angkaAcak = new Random().nextInt(10);
+            pembangunId.append(angkaAcak);
         }
 
-        return idBuilder.toString();
+        return pembangunId.toString();
     }
 
-    private void setSalaryBasedOnPosition(String position) {
-        switch (position.toLowerCase()) {
+    private void setGajiBerdasarkanPosisi(String posisi) {
+        switch (posisi.toLowerCase()) {
             case "manager":
-                this.salary = 8000000;
+                this.gaji = 8000000;
                 break;
             case "supervisor":
-                this.salary = 6000000;
+                this.gaji = 6000000;
                 break;
             case "admin":
-                this.salary = 4000000;
+                this.gaji = 4000000;
                 break;
             default:
-                System.out.println("Invalid position specified.");
+                System.out.println("Posisi yang dimasukkan tidak valid.");
                 break;
         }
     }
 
-    public String getId() {
-        return id;
+    public String getIdKaryawan() {
+        return idKaryawan;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdKaryawan(String idKaryawan) {
+        this.idKaryawan = idKaryawan;
     }
 
-    public String getName() {
-        return name;
+    public String getNama() {
+        return nama;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
-    public String getGender() {
-        return gender;
+    public String getJenisKelamin() {
+        return jenisKelamin;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setJenisKelamin(String jenisKelamin) {
+        this.jenisKelamin = jenisKelamin;
     }
 
-    public String getPosition() {
-        return position;
+    public String getPosisi() {
+        return posisi;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
-        setSalaryBasedOnPosition(position);
+    public void setPosisi(String posisi) {
+        this.posisi = posisi;
+        setGajiBerdasarkanPosisi(posisi);
     }
 
-    public double getSalary() {
-        return salary;
+    public double getGaji() {
+        return gaji;
     }
 
-    public void setSalary(double salary) {
-        this.salary = salary;
+    public void setGaji(double gaji) {
+        this.gaji = gaji;
     }
 }

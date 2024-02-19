@@ -7,12 +7,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Office office = new Office();
+        Scanner masukan = new Scanner(System.in);
+        Office kantor = new Office();
 
-        boolean loop = true;
+        boolean flag = true;
 
-        while (loop) {
+        while (flag) {
             System.out.println("+=================+");
             System.out.println("|Menu:            |");
             System.out.println("+=================+");
@@ -26,42 +26,42 @@ public class Main {
             int choice = scanner.nextInt();
             scanner.nextLine();
 
-            switch (choice) {
+            switch (pilihan) {
                 case 1:
-                    insertData(office, scanner);
+                    masukkanDataKaryawan(kantor, masukan);
                     break;
                 case 2:
-                    office.viewData();
+                    kantor.lihatData();
                     break;
                 case 3:
-                    office.updateData();
+                    kantor.perbaruiData();
                     break;
                 case 4:
-                    office.deleteEmployee();
+                    kantor.hapusKaryawan();
                     break;
                 case 5:
-                    a = false;
+                    flag = false;
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Pilihan tidak valid. Silakan coba lagi.");
                     break;
             }
         }
-        scanner.close();
+        masukan.close();
     }
 
-    private static void insertData(Office office, Scanner scanner) {
-        System.out.print("Input nama karyawan [>= 3]: ");
-        String name = scanner.nextLine();
+    private static void masukkanDataKaryawan(Office kantor, Scanner masukan) {
+        System.out.print("Masukkan nama karyawan [>= 3]: ");
+        String nama = masukan.nextLine();
 
-        System.out.print("Input jenis kelamin [Laki-laki | Perempuan] (Case Sensitive): ");
-        String gender = scanner.nextLine();
+        System.out.print("Masukkan jenis kelamin [Laki-laki | Perempuan] (Huruf Besar): ");
+        String jenisKelamin = masukan.nextLine();
 
-        System.out.print("Input jabatan [Manager | Supervisor | Admin] (Case Sensitive): ");
-        String position = scanner.nextLine();
+        System.out.print("Masukkan jabatan [Manager | Supervisor | Admin] (Huruf Besar): ");
+        String jabatan = masukan.nextLine();
 
-        Employee newEmployee = new Employee(name, gender, position);
-        office.addEmployee(newEmployee);
+        Employee karyawanBaru = new Employee(nama, jenisKelamin, jabatan);
+        kantor.tambahKaryawan(karyawanBaru);
 
         System.out.println("Karyawan berhasil ditambahkan.");
     }
